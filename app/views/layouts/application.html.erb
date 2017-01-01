@@ -13,8 +13,8 @@
     <nav>
       <ul class="menu">
         <li><a href="/"><span class="iconic home"></span> Home</a></li>
-        <li><a href="#"><span class="iconic plus-alt"></span> State Machine Design</a></li>
-        <li><a href="#"><span class="iconic mail"></span> Logged in as <strong><%= current_user.email %></strong></a>
+        <li><a href="/state_machines"><span class="iconic plus-alt"></span> State Machine Design</a></li>
+        <li><a><span class="iconic mail"></span> Logged in as <strong><%= current_user.email %></strong></a>
           <ul>
             <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
             
@@ -25,8 +25,7 @@
       <div class="clearfix"></div>
     </nav>
   </div>
+  <%= yield %>
 <% end %>
-<%= yield %>
-
 </body>
 </html>

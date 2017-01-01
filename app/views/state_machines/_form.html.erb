@@ -1,0 +1,25 @@
+<%= form_for(@state_machine) do |f| %>
+  <% if @state_machine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@state_machine.errors.count, "error") %> prohibited this state_machine from being saved:</h2>
+
+      <ul>
+      <% @state_machine.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :File %><br>
+    <%= f.file_field :photo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
