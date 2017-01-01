@@ -1,0 +1,63 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-default panel-table">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col col-xs-6">
+          <h3 class="panel-title">Listing State Machine Nodes</h3>
+          <p id="notice"><%= notice %>
+        </div>
+        <div class="col col-xs-6 text-right">
+          <%= link_to 'BACK', state_machines_path ,class: "btn btn-sm btn-primary btn-create"%>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <% if @state_machine_nodes.blank? %>
+        NO DATA AVAILABLE
+      <% else %>
+        <table class="table table-striped table-bordered table-list">
+          <thead>
+            <tr>
+              <th class="sm-action"><em class="fa fa-cog"></em></th>
+              <th class="hidden-xs">ID</th>
+              <th>Name</th>
+            </tr> 
+          </thead>
+          <tbody>
+            <% @state_machine_nodes.each_with_index do |node, index| %>        
+              <tr>
+                <td align="center">
+                  <%= link_to '<i class="fa fa-eye"></i> '.html_safe, edit_state_machine_state_machine_node_path(state_machine_id: node.state_machine_id ,id: node) ,class: "btn btn-default"%>
+                  <%#= link_to '<i class="fa fa-pencil"></i> '.html_safe, edit_state_machine_path(state_machine) ,class: "btn btn-default"%>
+                  <%= link_to '<i class="fa fa-trash"></i> '.html_safe, state_machine_state_machine_node_path(state_machine_id: node.state_machine_id ,id: node) , method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-danger"%>
+                </td>
+                <td class="hidden-xs"><%= node.state_node_id %></td>
+                <td><%= node.node_title %></td>
+              </tr>
+            <% end %>    
+          </tbody>
+        </table>
+      <% end %>  
+    </div>
+    <!-- <div class="panel-footer">
+      <div class="row">
+        <div class="col col-xs-4">Page 1 of 5
+        </div>
+        <div class="col col-xs-8">
+          <ul class="pagination hidden-xs pull-right">
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+          </ul>
+          <ul class="pagination visible-xs pull-right">
+              <li><a href="#">«</a></li>
+              <li><a href="#">»</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

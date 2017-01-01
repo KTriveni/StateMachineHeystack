@@ -1,0 +1,48 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-default panel-table">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col col-xs-6">
+          <h3 class="panel-title">Generate Usecase Journey</h3>
+          <p id="notice"><%= notice %>
+        </div>
+        <div class="col col-xs-6 text-right">
+          
+
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <%= image_tag @state_machine.photo.url(:large) %>
+    </div>
+    <br>
+    <div>
+      <form class="form-inline">
+        <div class="form-group">
+          <label id="InputNode">Node Pick-up : </label>
+          <input type="text" class="form-control" id="exampleInputName2" placeholder="1 or 1.1">
+        </div>
+        <div class="form-group">
+          <label id="ExitNode">Node Exit : </label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+        </div>
+        <button type="submit" class="btn btn-primary" id="state_machine_journey">Generate Journey</button>
+      </form>
+    </div>
+    <br>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $("#state_machine_journey").click(function() {
+    $.ajax({
+        url: "/state_machine_nodes/state_machine_journey",
+        type: "POST",
+        data: {name: $(this).val()},
+        success: function (data) { 
+            // append data to your page
+            $("page_element").html(data);
+        }
+    });
+  });
+</script>

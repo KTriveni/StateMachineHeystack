@@ -1,13 +1,13 @@
 <div class="panel panel-default">
   <div class="panel-body">state machine index</div>
   <p id="notice"><%= notice %></p>
-  <p>
+  <div>
     <strong>Name:</strong>
     <%= @state_machine.name %>
-  </p>
-  <p>
+  </div><br>
+  <div>  
     <strong>File:</strong>
     <%= image_tag @state_machine.photo.url(:large) %>
-  </p>
+  </div>  
   <%= link_to 'Back', state_machines_path %>
 </div>
