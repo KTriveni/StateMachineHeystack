@@ -1,0 +1,2 @@
+class StateMachinesController < ApplicationController
+end
