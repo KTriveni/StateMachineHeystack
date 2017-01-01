@@ -1,0 +1,30 @@
+<div class="sign_in_body">
+  <div class="sign_in_wrapper">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: {class: "login"}) do |f| %>
+      <p class="sign_in_title">Log in</p>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true %>
+        </div>
+        <i class="fa fa-user"></i>
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off" %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        </div>
+        <i class="fa fa-key"></i>
+        <%= render "devise/shared/links" %>
+        <button>
+          <i class="spinner"></i>
+          <span class="state">Sign up</span>
+        </button>
+      </p>
+    <% end -%>
+  </div>
+</div>
