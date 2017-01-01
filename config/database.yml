@@ -7,3 +7,13 @@ development:
   password: iamraghu
   host: localhost
   port: 5432
+  
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: state_machine_heystack_dev_db
+  pool: 5
+  username: iamraghu
+  password: iamraghu
+  host: localhost
+  port: 5432  
