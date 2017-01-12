@@ -16,17 +16,17 @@
     </div>
     <br>
     <div>
-      <form class="form-inline">
-        <div class="form-group">
-          <label id="InputNode">Node Pick-up : </label>
-          <input type="text" class="form-control" id="exampleInputName2" placeholder="1 or 1.1">
-        </div>
-        <div class="form-group">
-          <label id="ExitNode">Node Exit : </label>
-          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-        </div>
-        <button type="submit" class="btn btn-primary" id="">Generate Journey</button>
-      </form>
+  
+      <div class="form-group">
+        <label>Node Pick-up : </label>
+        <input type="text" id="InputNode" placeholder="1 or 1.1" autofocus="false">
+      </div>
+      <div class="form-group">
+        <label>Node Exit : </label>
+        <input type="text" id="ExitNode" placeholder="1 or 1.1" autofocus="false">
+      </div>
+      <button type="submit" class="btn btn-primary" id="state_machine_journey">Generate User Journey</button>
+
     </div>
     <br>
   </div>
@@ -34,14 +34,17 @@
 
 <script type="text/javascript">
   $("#state_machine_journey").click(function() {
+    var p_node = $('#InputNode').val();
+    var e_node = $('#ExitNode').val();
+    if(p_node == '' && e_node == ''){
+      bootbox.alert('enter values in search nodes');
+      return false;
+    }else{
     $.ajax({
-        url: "/state_machine_nodes/state_machine_journey",
+        url: "/state_machines/9/state_machine_nodes/9/generate_user_journey",
         type: "POST",
-        data: {name: $(this).val()},
-        success: function (data) { 
-            // append data to your page
-            $("page_element").html(data);
-        }
-    });
+        data: {pick_up_node: $(InputNode).val(),exit_node: $(ExitNode).val() }
+    }); 
+    } 
   });
 </script>

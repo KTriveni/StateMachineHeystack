@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :state_machine_nodes do 
       member do 
         get 'generate_nodes'
+        post 'export'
+        post 'generate_user_journey'
       end
     end
   end

@@ -9,6 +9,11 @@
         </div>
         <div class="col col-xs-6 text-right">
           <%= link_to 'BACK', state_machines_path ,class: "btn btn-sm btn-primary btn-create"%>
+          <%= link_to 'SAMPLE CSV', state_machine_state_machine_nodes_path(format: :csv),class: "btn btn-sm btn-primary btn-create" %>
+          <%= form_tag export_state_machine_state_machine_node_path(state_machine_id: params[:state_machine_id], id: params[:id]), multipart: true do %>
+            <%= file_field_tag :file %>
+            <%= submit_tag "Import CSV" %>
+          <% end %>
         </div>
       </div>
     </div>

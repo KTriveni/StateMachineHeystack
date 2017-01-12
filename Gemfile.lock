@@ -42,6 +42,7 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootbox-rails (0.5.0)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.2.2)
@@ -172,6 +173,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  bootbox-rails
   bootstrap-sass (~> 3.2.0)
   byebug
   coffee-rails (~> 4.1.0)

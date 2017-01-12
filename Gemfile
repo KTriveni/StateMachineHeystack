@@ -30,6 +30,7 @@ gem 'autoprefixer-rails'
 #Adding devise gem for user Auth
 gem 'devise'
 gem "paperclip", "~> 5.0.0"
+gem 'bootbox-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
