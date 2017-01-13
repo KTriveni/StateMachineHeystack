@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+  <div class="panel-body">State Machine Node </div>
+  <p id="notice"><%= notice %></p>
+  <div>
+    <strong>Node Name:</strong>
+    <%= @state_machine_node.node_title %>
+  </div><br>
+  <div>
+    <strong>Node ID:</strong>
+    <%= @state_machine_node.state_node_id %>
+  </div><br>
+  <div>
+    <strong>Is Condition:</strong>
+    <%= @state_machine_node.is_condition ? 'TRUE' : 'FALSE' %>
+  </div><br>
+  <div>
+    <strong>Parent Node Id:</strong>
+    <%= @state_machine_node.parent_node_id.compact.blank? ? 'NIL' : @state_machine_node.parent_node_id %>
+  </div><br>
+  <%= link_to 'Back', generate_nodes_state_machine_state_machine_node_path(state_machine_id: @state_machine_node.state_machine_id) ,class: "btn btn-default"%>
+</div>

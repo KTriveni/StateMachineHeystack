@@ -27,19 +27,22 @@
               <th class="sm-action"><em class="fa fa-cog"></em></th>
               <th class="hidden-xs">ID</th>
               <th>Name</th>
+              <th>Parent IDS</th>
+              <th>IS Condition</th>
             </tr> 
           </thead>
           <tbody>
             <% @state_machine_nodes.each_with_index do |node, index| %>        
               <tr>
-                <td align="center">
-                  <button>               
-                  <%= link_to '<i class="fa fa-eye"></i> '.html_safe,"data-toggle" => "modal", 'data-target' => '#smModal' ,class: "btn btn-default" %> </button>
+                <td align="center">               
+                  <%= link_to '<i class="fa fa-eye"></i> '.html_safe,state_machine_state_machine_node_path(state_machine_id: node.state_machine_id,id: node.id) ,class: "btn btn-default"%>
                   <%#= link_to '<i class="fa fa-pencil"></i> '.html_safe, edit_state_machine_path(state_machine) ,class: "btn btn-default"%>
                   <%= link_to '<i class="fa fa-trash"></i> '.html_safe, state_machine_state_machine_node_path(state_machine_id: node.state_machine_id ,id: node) , method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-danger"%>
                 </td>
                 <td class="hidden-xs"><%= node.state_node_id %></td>
                 <td><%= node.node_title %></td>
+                <td><%= node.parent_node_id %></td>
+                <td><%= node.is_condition ? 'TRUE' : 'FALSE' %></td>
               </tr>
               <div class="modal fade" id="smModal" role="dialog">
                 <div class="modal-dialog">  

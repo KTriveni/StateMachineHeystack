@@ -15,9 +15,27 @@ class StateMachineNodesController < ApplicationController
 	end
 
 	def export
-	  StateMachineNode.import(params[:file])	
+		if params[:file].nil?
+			redirect_to :back, notice: 'Please upload csv file.'
+		else	
+	    StateMachineNode.import(params[:file].path,params[:state_machine_id])	
+	    redirect_to :back, notice: 'Csv file uploaded sucessfully.'
+	  end  
 	end
 
+	def show
+		@state_machine_node = StateMachineNode.find_by(params[:node_id])
+	end
+
+  def destroy
+  	@state_machine_node = StateMachineNode.find_by(id: params[:id])
+    @state_machine_node.destroy
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'State machine node was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+	
 	def generate_user_journey
 		unless (params[:pick_up_node] || params[:exit_node]).blank?
 			@state_machine_nodes = StateMachineNode.where(state_machine_id: params['state_machine_id']) 
