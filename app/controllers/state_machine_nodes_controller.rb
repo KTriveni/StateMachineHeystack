@@ -1,4 +1,7 @@
 class StateMachineNodesController < ApplicationController
+	include NodeSearch
+	protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+
 	def index
 	  @state_machine = StateMachine.find_by(id: params['state_machine_id'])	
 	  respond_to do |format|
@@ -23,6 +26,15 @@ class StateMachineNodesController < ApplicationController
 	  end  
 	end
 
+	def node_import
+    if params[:file].nil?
+    	redirect_to :back, notice: 'Please upload csv file.'
+		else	
+	    StateMachineNodeResource.node_import(params[:file].path,params[:state_machine_id])	
+	    redirect_to '/state_machines', notice: 'Csv file uploaded sucessfully.'
+	  end
+	end
+
 	def show
 		@state_machine_node = StateMachineNode.find_by(params[:node_id])
 	end
@@ -35,55 +47,49 @@ class StateMachineNodesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def check
+    @graph = Hash.new { |hash, key| hash[key] = [] }
+  end
+
+  def addEdge(a, b)
+    @graph[a] << b
+    @graph[b] << a
+  end
+
+
+  def searchPath(a, b, result,&bl)
+    result = result+[a] # !! copy and add a
+
+    bl.call(result) if a == b
+    @graph[a].each do |v|
+         searchPath(v, b, result,&bl) if ! result.include?(v)
+    end
+  end
 	
 	def generate_user_journey
 		unless (params[:pick_up_node] || params[:exit_node]).blank?
-			@state_machine_nodes = StateMachineNode.where(state_machine_id: params['state_machine_id']) 
-			if valid_nodes(@state_machine_nodes)
-				generate_journey(params,@state_machine_nodes)
-        @record = 'dsajjdh djshasd asgd ausygdyasdg ysuadg asyud asyudgsay dgsayd asyugdasygdsya dsayudg saydgasyudgasyud syuad '
-			else	
-			  @record = ''
-      end
+			@state_machine_nodes = StateMachineNodeResource.where(state_machine_id: params['state_machine_id']).pluck(:parent_node_id,:child_node_id)
+			node_stack = check
+			@state_machine_nodes.each do |node_row| 
+        addEdge(node_row[0],node_row[1])  
+			end	
+			@record = []
+			@record_length = [] 
+			searchPath(params[:pick_up_node],params[:exit_node], []) { |path|
+			 @record << "#{path.join(", ")}" 
+			 @record_length << "#{path.size}" 
+			}
+      @record = send_min_length(@record,@record_length)
       respond_to do |format|
 		    format.js
 		  end
 		end 
 	end
 
-	private
-	def valid_nodes(state_machine_nodes)
-		if @state_machine_nodes.collect(&:state_node_id).include? params[:pick_up_node]&&params[:exit_node]
-      return true
-    else
-    	return false
-		end	
+	def send_min_length(record,rl)
+		min_path_size = rl.min
+    record_index = rl.each_index.select{|i| rl[i] != min_path_size}
+    return record.delete_if.with_index { |_, index| record_index.include? index }
 	end
-
-	def generate_journey(params,state_machine_nodes)
-		pick_up_node = state_machine_nodes.find_by(state_node_id: params[:pick_up_node]) 
-		exit_node = StateMachineNode.find_by(state_node_id: params[:exit_node])
-	  user_journey1(pick_up_node,exit_node,state_machine_nodes)
-	end
-
-  def user_journey1(pick_up_node,exit_node,state_machine_nodes)
-  	debugger
-  end
-
-	def user_journey(pick_up_node,exit_node,state_machine)
-    journey = []
-    journey << "#{exit_node.state_node_id} #{exit_node.node_title}"
-    temp_journey = []
-    temp_node = exit_node.parent_node_id
-    unless temp_node.count == 0
-	    temp_node.each do |t_p|
-	    	d = StateMachineNode.find(state_machine_id: state_machine.id,state_node_id: t_p)
-	    	temp_journey << "#{d.state_node_id} #{d.title}"
-	    	break if d.state_node_id == exit_node
-	    	unless d.parent_node_id.blank?
-             
-	    	end
-			end		
-    end
-	end 
 end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       member do 
         get 'generate_nodes'
         post 'export'
+        post 'node_import'
         post 'generate_user_journey'
       end
     end

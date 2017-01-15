@@ -41,7 +41,7 @@
       return false;
     }else{
     $.ajax({
-        url: "/state_machines/9/state_machine_nodes/9/generate_user_journey",
+        url: "/state_machines/<%= @state_machine.id%>/state_machine_nodes/<%= @state_machine.id %>/generate_user_journey",
         type: "POST",
         data: {pick_up_node: $(InputNode).val(),exit_node: $(ExitNode).val() }
     }); 

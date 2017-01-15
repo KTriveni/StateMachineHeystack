@@ -1,5 +1,5 @@
 <% if @record.blank? %>
   bootbox.alert('Please Enter valid node points');
 <% else %>
-  bootbox.alert("<%= @record%>");
+  bootbox.alert("<%= record_title(@record)%>");
 <% end %>
