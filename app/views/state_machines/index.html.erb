@@ -28,7 +28,7 @@
                 <%= link_to '<i class="fa fa-eye" data-toggle="tooltip" title="Show"></i> '.html_safe, state_machine ,class: "btn btn-default"%>
                 <%= link_to '<i class="fa fa-pencil" data-toggle="tooltip" title="Edit!"></i> '.html_safe, edit_state_machine_path(state_machine) ,class: "btn btn-default"%>
                 <%= link_to '<i class="fa fa-desktop" data-toggle="tooltip" title="User Journey"></i> '.html_safe, state_machine_state_machine_nodes_path(state_machine) ,class: "btn btn-default"%>
-                <%= link_to '<i class="fa fa-cogs" data-toggle="tooltip" title="State Machine Nodes"></i> '.html_safe, generate_nodes_state_machine_state_machine_node_path(state_machine_id: state_machine, id: state_machine.id) ,class: "btn btn-default"%>
+                <%= link_to '<i class="fa fa-cogs" data-toggle="tooltip" title="Upload CSV"></i> '.html_safe, generate_nodes_state_machine_state_machine_node_path(state_machine_id: state_machine, id: state_machine.id) ,class: "btn btn-default"%>
                 <%= link_to '<i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i> '.html_safe, state_machine , method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-danger"%>
               </td>
               <td class="hidden-xs"><%= index+1 %></td>
