@@ -1,0 +1,11 @@
+<p>There are <%= record_count(@record) %> User Journey(s).</p> </br>
+<% a = record_title(record) %>
+<div class="container">
+<% ind = 1 %>
+<% a.each do |re| %>
+  <p>Journey <%= ind %> : <%= re.join('-->')%>.</p>
+  <br>
+  <br>
+  <% ind += 1 %>
+<% end %>
+</div>

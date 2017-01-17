@@ -1,5 +1,8 @@
 <% if @record.blank? %>
   bootbox.alert('Please Enter valid node points');
 <% else %>
-  bootbox.alert("<%= record_title(@record)%>");
+  $('#node-nj').hide();
+  $('#btn-nj').hide();
+  $('#sh-btn-nj').show();
+  $('#out_put_journey').html("<%= j render 'journey_form' , record: @record %>");
 <% end %>
