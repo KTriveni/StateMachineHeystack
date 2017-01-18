@@ -58,12 +58,11 @@ class StateMachineNodesController < ApplicationController
   end
 
 
-  def searchPath(a, b, result,&bl)
-    result = result+[a] # !! copy and add a
-
-    bl.call(result) if a == b
+  def searchPath(a, b, result,lr)
+    result = result+[a]
+    lr << result if a == b
     @graph[a].each do |v|
-         searchPath(v, b, result,&bl) if ! result.include?(v)
+         searchPath(v, b, result,lr) if ! result.include?(v)
     end
   end
 	
@@ -74,13 +73,25 @@ class StateMachineNodesController < ApplicationController
 			@state_machine_nodes.each do |node_row| 
         addEdge(node_row[0],node_row[1])  
 			end	
-			@record = []
-			@record_length = [] 
-			searchPath(params[:pick_up_node],params[:exit_node], []) { |path|
-			 @record << "#{path.join(", ")}" 
-			 @record_length << "#{path.size}" 
-			}
-      @record = send_min_length(@record,@record_length)
+		  searchPath(params[:pick_up_node],params[:exit_node], [],a=[])
+		  jing = []
+			a.each do |qax|
+			  wssd = []
+			  qax.each_cons(2) {|gtd| wssd << gtd}
+		    ting = []
+		    wssd.each do |rswe|
+		      if @state_machine_nodes.include? rswe
+		        ting << 'true'
+		      else 
+		        ting << 'false'  
+		      end
+		    end
+		    ysd = ting.uniq
+		    if ((ysd.count == 1) && (ysd.include? 'true'))
+		      jing << qax
+		    end
+			end
+			@record = jing
       respond_to do |format|
 		    format.js
 		  end

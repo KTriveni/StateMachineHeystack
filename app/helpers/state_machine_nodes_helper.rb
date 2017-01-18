@@ -3,7 +3,7 @@ module StateMachineNodesHelper
 		@user_journeys = []
 		record.each do |journey|
 			user_journey = []
-			node_ids = journey.split(',')
+			node_ids = journey
       node_ids.each do |node_id| 
 	      user_journey << StateMachineNode.find_by(state_machine_id: params[:id],state_node_id: node_id.strip).node_title
       end
