@@ -16,6 +16,9 @@
       <%= image_tag @state_machine.photo.url(:large) %>
     </div>
     <br>
+    <div id='result-note' style="display:none;">
+      <h1>Please Wait For Results</h1>
+      </div>
     <div id='node-nj'>
   
       <div class="form-group">
@@ -26,7 +29,7 @@
         <label>Node Exit : </label>
         <input type="text" id="ExitNode" placeholder="1 or 1.1" autofocus="false">
       </div>
-      <button type="submit" class="btn btn-primary" id="state_machine_journey">Generate User Journey</button>
+      <button type="submit" class="btn btn-primary" id="state_machine_journey">Generate User Journey</button>     
     </div>
     <br>
     <div id="out_put_journey">
@@ -37,6 +40,7 @@
 
 <script type="text/javascript">
   $("#state_machine_journey").click(function() {
+    $('#result-note').show().fadeOut(10000);
     var p_node = $('#InputNode').val();
     var e_node = $('#ExitNode').val();
     if(p_node == '' && e_node == ''){

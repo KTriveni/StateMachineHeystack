@@ -1,13 +1,27 @@
-<div class="panel panel-default">
-  <div class="panel-body">state machine index</div>
-  <p id="notice"><%= notice %></p>
-  <div>
-    <strong>Name:</strong>
-    <%= @state_machine.name %>
-  </div><br>
-  <div>  
-    <strong>File:</strong>
-    <%= image_tag @state_machine.photo.url(:large) %>
-  </div>  
-  <%= link_to 'Back', state_machines_path %>
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-default panel-table">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col col-xs-6">
+          <h3 class="panel-title">State Machine</h3>
+          <p id="notice"><%= notice %>
+        </div>
+        <div class="col col-xs-6 text-right">
+          <%= link_to 'BACK', state_machines_path ,class: "btn btn-sm btn-primary btn-create" ,id: 'btn-nj'%>
+
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div>
+        <strong>Name:</strong>
+        <%= @state_machine.name %>
+      </div><br>
+      <div>  
+        <strong>File:</strong>
+        <%= image_tag @state_machine.photo.url(:ultra_large),style: 'width: 926px; height: 520px' %>
+      </div> 
+    </div>
+    <br>
+  </div>
 </div>
