@@ -22,12 +22,15 @@
     <div id='node-nj'>
   
       <div class="form-group">
-        <label>Node Pick-up : </label>
-        <input type="text" id="InputNode" placeholder="1 or 1.1" autofocus="false">
+        <label>Node Pick-up : <div class="ras-node">
+        <%= select("node_title", "id", StateMachineNode.all.collect {|r| [ r.state_node_id+" - "+r.node_title, r.state_node_id ] }, { :include_blank => true },id: "InputNode") %>
+        </div></label>
+        
       </div>
       <div class="form-group">
-        <label>Node Exit : </label>
-        <input type="text" id="ExitNode" placeholder="1 or 1.1" autofocus="false">
+        <label>Node Exit : <div class="ras-node">
+        <%= select("node_title", "id", StateMachineNode.all.collect {|r| [ r.state_node_id+" - "+r.node_title, r.state_node_id ] }, { :include_blank => true },id: "ExitNode") %>
+        </div></label>
       </div>
       <button type="submit" class="btn btn-primary" id="state_machine_journey">Generate User Journey</button>     
     </div>
@@ -53,5 +56,8 @@
         data: {pick_up_node: $(InputNode).val(),exit_node: $(ExitNode).val() }
     }); 
     } 
+  });
+  $( "#InputNode, #ExitNode" ).select2({
+    theme: "bootstrap"
   });
 </script>

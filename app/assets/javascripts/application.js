@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require jquery.elevatezoom
 //= require bootbox
 //= require turbolinks
+//= require select2
 //= require_tree .
